@@ -13,7 +13,7 @@ host: "cloud-25.cs.trinity.edu"
 basePath: "/v2"
 tags:
 - name: "user"
-  description: "Everything about your Pets"
+  description: "Everything realting to users"
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
@@ -25,21 +25,18 @@ paths:
     post:
       tags:
       - "user"
-      summary: "Creates list of users with given input array"
+      summary: "To log in, provide the following"
       description: ""
-      operationId: "createUsersWithArrayInput"
+      operationId: "login"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
-        name: "body"
-        description: "List of user object"
+        name: "credential"
+        description: "Login information"
         required: true
         schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+          $ref: "#/definitions/LoginInfo"
       responses:
         200:
           description: "successful operation"
@@ -62,11 +59,10 @@ paths:
     post:
       tags:
       - "user"
-      summary: "Creates list of users with given input array"
+      summary: "Signs a new user up"
       description: ""
-      operationId: "createUsersWithListInput"
+      operationId: "signup"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
@@ -99,23 +95,17 @@ paths:
     get:
       tags:
       - "user"
-      summary: "Logs user into the system"
+      summary: "Returns the profile information of a specified user"
       description: ""
-      operationId: "loginUser"
+      operationId: "info"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "userid"
         in: "query"
-        description: "The user name for login"
+        description: "The user ID"
         required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "successful operation"
@@ -148,6 +138,13 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
+  LoginInfo:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
   User:
     type: "object"
     properties:
