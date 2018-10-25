@@ -1,0 +1,174 @@
+swagger: "2.0"
+info:
+  description: "This is our API"
+  version: "0.1.0"
+  title: "HEB"
+  termsOfService: "terms of service"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "cloud-25.cs.trinity.edu"
+basePath: "/v2"
+tags:
+- name: "user"
+  description: "Everything realting to users"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "https"
+- "http"
+paths:
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "To log in, provide the following"
+      description: ""
+      operationId: "login"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "credential"
+        description: "Login information"
+        required: true
+        schema:
+          $ref: "#/definitions/LoginInfo"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        401:
+          description: "Invalid username/password supplied"
+        500:
+          description: "Unexpected server error"
+  /user/signup:
+    post:
+      tags:
+      - "user"
+      summary: "Signs a new user up"
+      description: ""
+      operationId: "signup"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of user object"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        401:
+          description: "Invalid username/password supplied"
+        500:
+          description: "Unexpected server error"
+  /user/info:
+    get:
+      tags:
+      - "user"
+      summary: "Returns the profile information of a specified user"
+      description: ""
+      operationId: "info"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userid"
+        in: "query"
+        description: "The user ID"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        400:
+          description: "Invalid username/password supplied"
+        501:
+          description: "Unexpected server error"
+
+securityDefinitions:
+  hebapi_auth:
+    type: "oauth2"
+    authorizationUrl: "http://api.hebproject.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:candidates: "modify candidate information in your account"
+      read:candidates: "read candidates"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  LoginInfo:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "string"
+      userStatus:
+        type: "integer"
+        format: "int32"
+        description: "User Status"
+    xml:
+      name: "User"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
