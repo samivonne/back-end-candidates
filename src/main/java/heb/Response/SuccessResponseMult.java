@@ -3,10 +3,10 @@ package heb.Response;
 import java.util.List;
 import heb.candidate.Candidate;
 
-public class SuccessResponseMul extends Response
+public class SuccessResponseMult extends Response
 {
     private List<Candidate> result;
-    public SuccessResponseMul(int code, String status, String message, List<Candidate> cands)
+    public SuccessResponseMult(int code, String status, String message, List<Candidate> cands)
     {
         this.code = code;
         this.status = status;

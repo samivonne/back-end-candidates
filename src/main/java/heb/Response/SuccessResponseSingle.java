@@ -2,7 +2,7 @@ package heb.Response;
 
 import heb.candidate.Candidate;
 
-public class SuccessResponseSingle extends Response
+public class SuccessResponseSingle extends Response implements SingleObject
 {
     private Candidate result;
     public SuccessResponseSingle(int code, String status, String message, Candidate cand)

@@ -49,6 +49,12 @@ public class Candidate {
     @Column(name = "password")
     private String password;
 
+
+    public int getUserId()
+    {
+        return userId;
+    }
+
     public String getUserName(){
         return userName;
     }
@@ -139,7 +145,7 @@ public class Candidate {
 
     public boolean checkEmpty()
     {
-        if ( (userName == "") || (password == "") || (firstName == "") || (lastName == "") || (email == "") || (phoneNumber == ""))
+        if ( (userName.equals("") || (password.equals("") ) || (firstName.equals("") ) || (lastName.equals("") ) || (email.equals("") ) || (phoneNumber.equals("") ) ) )
             return true;
         else
             return false;
