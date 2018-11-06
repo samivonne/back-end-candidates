@@ -37,34 +37,33 @@ public class CandidateController {
 
     //Get a list of all users along with their information
     @GetMapping("/users")
-    public String getUsers()
+    public Response getUsers()
     {
         Iterable<Candidate> all = candidateRepository.findAll();
         List<Candidate> cands = new ArrayList<Candidate>();
         all.forEach(cands::add);
         Response res = new SuccessResponseMul(200, "0", "Success", cands);
-        return (gson.toJson(res));
+        return res;
     }
 
     //Get information from a specific user
     @GetMapping(path="/{user}/info")
-    public String getUser(@PathVariable("user") String user)
+    public Response getUser(@PathVariable("user") String user)
     {
         Candidate cand = candidateRepository.findFirstByuserName(user);
+        Response res;
         if (cand != null){
-            Response res = new SuccessResponseSingle(200, "0", "Success", cand);
-            return (gson.toJson(res));
+            res = new SuccessResponseSingle(200, "0", "Success", cand);
         }
         else{
-            Response res = new FailedResponse(404, "1232", "User not found");
-            return (gson.toJson(res));
+            res = new FailedResponse(404, "1232", "User not found");
         }
-        
+        return res;      
     }
 
     //Check if a login is success or failure
     @PostMapping("/user/login")
-    public String login(@RequestBody Login attempt)
+    public Response login(@RequestBody Login attempt)
     {
         Response res;
         Candidate cand = candidateRepository.findFirstByuserName(attempt.getUserName());
@@ -76,12 +75,12 @@ public class CandidateController {
         {
             res = new FailedResponse(401, "1003", "Username or Password is incorrect");
         }
-        return (gson.toJson(res));
+        return res;
     }
 
     //Signup a user, if t
     @PostMapping("/user/signup")
-    public String signUp(@RequestBody Candidate cand)
+    public Response signUp(@RequestBody Candidate cand)
     {
         Response res;
         if (candidateRepository.findFirstByuserName(cand.getUserName()) != null)
@@ -100,7 +99,7 @@ public class CandidateController {
                 res = new SuccessResponseSingle(200, "10001", "Signup Success", cand);
             }
         }
-        return (gson.toJson(res));
+        return res;
     }
 
 

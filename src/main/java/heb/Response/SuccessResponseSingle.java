@@ -12,4 +12,14 @@ public class SuccessResponseSingle extends Response
         this.message = message;
         this.result = cand;
     }
+
+    public Candidate getResult()
+    {
+        return result;
+    }
+
+    public void setResult(Candidate result)
+    {
+        this.result = result;
+    }
 }

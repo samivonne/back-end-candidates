@@ -13,4 +13,14 @@ public class SuccessResponseMul extends Response
         this.message = message;
         this.result = cands;
     }
+
+    public List<Candidate> getResult()
+    {
+        return result;
+    }
+
+    public void setResult(List<Candidate> result)
+    {
+        this.result = result;
+    }
 }
