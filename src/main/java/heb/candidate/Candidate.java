@@ -1,4 +1,4 @@
-package heb.candidate;
+package heb.Candidate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

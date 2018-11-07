@@ -1,9 +1,7 @@
-package heb.candidate;
+package heb.Candidate;
 
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.gson.Gson;
-
 import heb.Response.*;
 import heb.Request.*;
 import java.util.*;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 
+//@CrossOrigin
 @RestController
 public class CandidateController {
     @Autowired
@@ -18,8 +17,8 @@ public class CandidateController {
 
     private Gson gson = new Gson();
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+//    private static final String template = "Hello, %s!";
+//    private final AtomicLong counter = new AtomicLong();
     @RequestMapping("/greeting")
     public String greeting()
     {

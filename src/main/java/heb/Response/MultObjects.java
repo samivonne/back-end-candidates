@@ -2,12 +2,12 @@ package heb.Response;
 
 import java.util.List;
 
-import heb.candidate.*;
+import heb.Candidate.*;
 
 public interface MultObjects {
 
     public List<Candidate> getResult ();
 
-    public void setResult(List<Candidate> cand);
+    public void setResult(List<Candidate> result);
         
 }

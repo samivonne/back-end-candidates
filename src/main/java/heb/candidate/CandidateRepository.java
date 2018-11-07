@@ -1,4 +1,4 @@
-package heb.candidate;
+package heb.Candidate;
 
 import java.util.List;
 
