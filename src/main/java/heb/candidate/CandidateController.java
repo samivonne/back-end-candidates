@@ -4,9 +4,18 @@ package heb.candidate;
 import com.google.gson.Gson;
 import heb.response.*;
 import heb.request.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 
 //@CrossOrigin
@@ -103,6 +112,14 @@ public class CandidateController {
 
 
 
+
+    @GetMapping("/resume")
+    public ResponseEntity<ByteArrayResource> getResume() throws IOException
+    {
+        Path path = Paths.get("C:\\Users\\thoai\\Documents\\Resume\\functionalSample.pdf");
+        ByteArrayResource resume = new ByteArrayResource(Files.readAllBytes(path));
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resume);
+    }
 
     //Testing requests
     //These are only for testing and should not be included in the main app
