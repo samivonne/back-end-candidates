@@ -1,4 +1,4 @@
-package heb.Response;
+package heb.response;
 
 public class FailedResponse extends Response{
     public FailedResponse(int code, String status, String message)

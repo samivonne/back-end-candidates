@@ -1,9 +1,9 @@
-package heb.Candidate;
+package heb.candidate;
 
 
 import com.google.gson.Gson;
-import heb.Response.*;
-import heb.Request.*;
+import heb.response.*;
+import heb.request.*;
 import java.util.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,10 @@ public class CandidateController {
     }
 
     //Get information from a specific user
-    @GetMapping(path="/{user}/info")
-    public ResponseEntity<Response> getUser(@PathVariable("user") String user)
+    @GetMapping(path="/{email}/info")
+    public ResponseEntity<Response> getUser(@PathVariable("email") String email)
     {
-        Candidate cand = candidateRepository.findFirstByuserName(user);
+        Candidate cand = candidateRepository.findFirstByemail(email);
         Response res;
         HttpStatus code;
         if (cand != null){
@@ -48,7 +48,7 @@ public class CandidateController {
             code = HttpStatus.OK;
         }
         else{
-            res = new FailedResponse(404, "1232", "User not found");
+            res = new FailedResponse(404, "1232", "Email not found");
             code = HttpStatus.NOT_FOUND;
         }
         return (new ResponseEntity<Response>(res, code));      
@@ -60,7 +60,7 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
-        Candidate cand = candidateRepository.findFirstByuserName(attempt.getUserName());
+        Candidate cand = candidateRepository.findFirstByemail(attempt.getUserName());
         if ((cand != null) && (cand.getPassword().equals(attempt.getPassword())))
         {
             res = new SuccessResponseSingle(200, "0", "Success", cand);
@@ -80,9 +80,9 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
-        if (candidateRepository.findFirstByuserName(cand.getUserName()) != null)
+        if (candidateRepository.findFirstByemail(cand.getEmail()) != null)
         {
-            res = new FailedResponse(404, "1502", "Username already exists");
+            res = new FailedResponse(404, "1502", "Email already in use");
             code = HttpStatus.FORBIDDEN;
         }
         else {
@@ -105,6 +105,7 @@ public class CandidateController {
 
 
     //Testing requests
+    //These are only for testing and should not be included in the main app
     @GetMapping("/test")
     public String test()
     {
@@ -115,14 +116,5 @@ public class CandidateController {
         }
         else
             return "User not in database";
-    }
-
-    @GetMapping("/test/add")
-    public String add()
-    {
-        Candidate cand = new Candidate();
-        cand.setUserName("abc");
-        candidateRepository.save(cand);
-        return "Adding one entry to the database";
     }
 }

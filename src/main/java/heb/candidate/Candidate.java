@@ -1,4 +1,4 @@
-package heb.Candidate;
+package heb.candidate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,20 +13,17 @@ public class Candidate {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
-    @Column(name = "userId")
-    private int userId;
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "firstName")
     private String firstName;
 
     @Column(name = "lastName")
     private String lastName;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "streetAddress")
     private String streetAddress;
@@ -50,17 +47,17 @@ public class Candidate {
     private String password;
 
 
-    public int getUserId()
+    public int getid()
     {
-        return userId;
+        return id;
     }
 
-    public String getUserName(){
-        return userName;
+    public String getEmail(){
+        return email;
     }
 
-    public void setUserName(String userName){
-        this.userName = userName;
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public String getFirstName(){
@@ -79,13 +76,6 @@ public class Candidate {
         this.lastName = lastName;
     }
 
-    public String getEmail(){
-        return email;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
-    }
 
     public String getStreetAddress(){
         return streetAddress;
@@ -145,7 +135,7 @@ public class Candidate {
 
     public boolean checkEmpty()
     {
-        if ( (userName.equals("") || (password.equals("") ) || (firstName.equals("") ) || (lastName.equals("") ) || (email.equals("") ) || (phoneNumber.equals("") ) ) )
+        if ((password.equals("") ) || (firstName.equals("") ) || (lastName.equals("") ) || (email.equals("") ) || (phoneNumber.equals("") ) )
             return true;
         else
             return false;

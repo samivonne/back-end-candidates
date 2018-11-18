@@ -1,18 +1,20 @@
-package heb.Candidate;
+package heb.candidate;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
+//This is a crudrepository for query candidate infos from mysql database
+
 public interface CandidateRepository extends CrudRepository<Candidate, Integer> {
 
     Candidate findFirstByemail(String email);
 
-    Candidate findFirstByuserName(String userName);
-
+    //First match and list of matching last name
     Candidate findFirstBylastName(String lastName);
     List<Candidate> findBylastName(String lastname);
 
+    //First match and list of matching first name
     Candidate findFirstByFirstName(String firstName);
     List<Candidate> findByFirstName(String firstName);
 }

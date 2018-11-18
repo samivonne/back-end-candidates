@@ -1,4 +1,4 @@
-package heb.Response;
+package heb.response;
 
 public abstract class Response {
     int code;

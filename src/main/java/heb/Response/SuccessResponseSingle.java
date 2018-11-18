@@ -1,6 +1,6 @@
-package heb.Response;
+package heb.response;
 
-import heb.Candidate.Candidate;
+import heb.candidate.Candidate;
 
 public class SuccessResponseSingle extends Response implements SingleObject
 {

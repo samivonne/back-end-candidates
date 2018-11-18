@@ -1,8 +1,8 @@
-package heb.Response;
+package heb.response;
 
 import java.util.List;
 
-import heb.Candidate.*;
+import heb.candidate.*;
 
 public interface MultObjects {
 

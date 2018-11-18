@@ -1,4 +1,4 @@
-package heb.Candidate;
+package heb.candidate;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@Configuration
 public class HEBConfiguration {
 
+
+    //This bean is to configure cors mapping
+    //Currently allows all api calls from any ip address
+    //Will change later to only allow front end machine to make these calls
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

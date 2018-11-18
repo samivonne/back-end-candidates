@@ -1,6 +1,6 @@
-package heb.Response;
+package heb.response;
 
-import heb.Candidate.*;
+import heb.candidate.*;
 
 public interface SingleObject {
 

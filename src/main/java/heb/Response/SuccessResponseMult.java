@@ -1,7 +1,7 @@
-package heb.Response;
+package heb.response;
 
 import java.util.List;
-import heb.Candidate.Candidate;
+import heb.candidate.Candidate;
 
 public class SuccessResponseMult extends Response implements MultObjects
 {

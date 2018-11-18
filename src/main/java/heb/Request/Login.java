@@ -1,4 +1,4 @@
-package heb.Request;
+package heb.request;
 
 public class Login
 {
