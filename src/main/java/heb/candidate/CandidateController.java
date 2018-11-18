@@ -60,7 +60,7 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
-        Candidate cand = candidateRepository.findFirstByemail(attempt.getUserName());
+        Candidate cand = candidateRepository.findFirstByemail(attempt.getEmail());
         if ((cand != null) && (cand.getPassword().equals(attempt.getPassword())))
         {
             res = new SuccessResponseSingle(200, "0", "Success", cand);

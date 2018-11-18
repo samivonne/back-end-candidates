@@ -2,18 +2,18 @@ package heb.request;
 
 public class Login
 {
-    private String userName;
+    private String email;
     private String password;
 
-    public Login(String userName, String password)
+    public Login(String email, String password)
     {
-        this.userName = userName;
+        this.email = email;
         this.password = password;
     }
 
-    public String getUserName()
+    public String getEmail()
     {
-        return userName;
+        return email;
     }
 
     public String getPassword()
