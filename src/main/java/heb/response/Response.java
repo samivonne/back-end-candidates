@@ -1,14 +1,9 @@
 package heb.response;
 
 public abstract class Response {
-    int code;
+
     String status;
     String message;
-
-    public int getCode()
-    {
-        return code;
-    }
 
     public String getStatus()
     {
@@ -18,11 +13,6 @@ public abstract class Response {
     public String getMessage()
     {
         return message;
-    }
-
-    public void setCode(int code)
-    {
-        this.code = code;
     }
 
     public void setStatus(String status)

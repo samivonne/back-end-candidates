@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CandidateRepository extends CrudRepository<Candidate, Integer> {
 
+    
     Candidate findFirstByemail(String email);
 
     //First match and list of matching last name
@@ -15,6 +16,6 @@ public interface CandidateRepository extends CrudRepository<Candidate, Integer> 
     List<Candidate> findBylastName(String lastname);
 
     //First match and list of matching first name
-    Candidate findFirstByFirstName(String firstName);
-    List<Candidate> findByFirstName(String firstName);
+    Candidate findFirstByfirstName(String firstName);
+    List<Candidate> findByfirstName(String firstName);
 }

@@ -3,6 +3,9 @@ package heb.candidate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,12 +46,15 @@ public class Candidate {
     @Column(name = "githubLink")
     private String githubLink;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
     @Column(name = "resume")
     private String resume;
 
+
+    //Setters and getters
     public int getid()
     {
         return id;
@@ -143,6 +149,7 @@ public class Candidate {
         this.resume = resume;
     }
 
+    // Check pertinent info that are not allowed to be empty
     public boolean checkEmpty()
     {
         if ((password.equals("") ) || (firstName.equals("") ) || (lastName.equals("") ) || (email.equals("") ) || (phoneNumber.equals("") ) )

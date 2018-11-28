@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import javax.annotation.Resource;
+//import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,6 @@ public class CandidateController {
 
     private Gson gson = new Gson();
 
-//    private static final String template = "Hello, %s!";
-//    private final AtomicLong counter = new AtomicLong();
     @RequestMapping("/greeting")
     public String greeting()
     {
@@ -41,7 +39,7 @@ public class CandidateController {
         Iterable<Candidate> all = candidateRepository.findAll();
         List<Candidate> cands = new ArrayList<Candidate>();
         all.forEach(cands::add);
-        Response res = new SuccessResponseMult(200, "0", "Success", cands);
+        Response res = new SuccessResponseMult("0", "Success", cands);
         return (new ResponseEntity<Response>(res, HttpStatus.OK));
     }
 
@@ -49,15 +47,16 @@ public class CandidateController {
     @GetMapping(path="/{email}/info")
     public ResponseEntity<Response> getUser(@PathVariable("email") String email)
     {
+        // Query for email address
         Candidate cand = candidateRepository.findFirstByemail(email);
         Response res;
         HttpStatus code;
         if (cand != null){
-            res = new SuccessResponseSingle(200, "0", "Success", cand);
+            res = new SuccessResponseSingle("0", "Success", cand);
             code = HttpStatus.OK;
         }
         else{
-            res = new FailedResponse(404, "1232", "Email not found");
+            res = new FailedResponse("1232", "Email not found");
             code = HttpStatus.NOT_FOUND;
         }
         return (new ResponseEntity<Response>(res, code));      
@@ -69,15 +68,16 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
+        // Check if email exist in the databse, then check the password
         Candidate cand = candidateRepository.findFirstByemail(attempt.getEmail());
         if ((cand != null) && (cand.getPassword().equals(attempt.getPassword())))
         {
-            res = new SuccessResponseSingle(200, "0", "Success", cand);
+            res = new SuccessResponseSingle("0", "Success", cand);
             code = HttpStatus.OK;
         }
         else
         {
-            res = new FailedResponse(401, "1003", "Username or Password is incorrect");
+            res = new FailedResponse("1003", "Username or Password is incorrect");
             code = HttpStatus.UNAUTHORIZED;
         }
         return (new ResponseEntity<Response>(res, code));
@@ -89,21 +89,24 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
+        // Check if email already in used
         if (candidateRepository.findFirstByemail(cand.getEmail()) != null)
         {
-            res = new FailedResponse(404, "1502", "Email already in use");
+            res = new FailedResponse("1502", "Email already in use");
             code = HttpStatus.FORBIDDEN;
         }
+        // Validation check for all the required fields
         else {
             if (cand.checkEmpty())
             {
-                res = new FailedResponse(401, "1501", "Missing mandatory information");
+                res = new FailedResponse("1501", "Missing mandatory information");
                 code = HttpStatus.UNAUTHORIZED;
             }
+            // Add user to the database
             else
             {
                 candidateRepository.save(cand);
-                res = new SuccessResponseSingle(200, "10001", "Signup Success", cand);
+                res = new SuccessResponseSingle("10001", "Signup Success", cand);
                 code = HttpStatus.OK;
             }
         }
@@ -113,15 +116,17 @@ public class CandidateController {
 
 
 
-    @GetMapping("/resume")
-    public ResponseEntity<ByteArrayResource> getResume() throws IOException
+    @GetMapping("/resume/test")
+    public ResponseEntity<ByteArrayResource> getResumeFromCandidate() throws IOException
     {
         //Will change this later
         //Will have to query for the path of their resume from the database
-        Path path = Paths.get("C:\\Users\\thoai\\Documents\\Resume\\functionalSample.pdf");
+        String resume = "template.pdf";
+        Path path = Paths.get("C:\\Users\\thoai bui\\Documents\\Resume\\template.pdf");
         //ByteArrayResource resume = ;
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))//Specify that it is a pdf file
-        .body(new ByteArrayResource(Files.readAllBytes(path)));
+        return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=\"" + resume + "\"") //header to specify the name
+                                    .contentType(MediaType.parseMediaType("application/octet-stream"))//Specify that it is a pdf file
+                                    .body(new ByteArrayResource(Files.readAllBytes(path))); //return the content of the file 
     }
 
     //Testing requests

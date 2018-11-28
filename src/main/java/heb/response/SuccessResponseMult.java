@@ -6,9 +6,8 @@ import heb.candidate.Candidate;
 public class SuccessResponseMult extends Response implements MultObjects
 {
     private List<Candidate> result;
-    public SuccessResponseMult(int code, String status, String message, List<Candidate> cands)
+    public SuccessResponseMult(String status, String message, List<Candidate> cands)
     {
-        this.code = code;
         this.status = status;
         this.message = message;
         this.result = cands;
