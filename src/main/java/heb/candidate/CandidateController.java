@@ -45,7 +45,7 @@ public class CandidateController {
         return (new ResponseEntity<Response>(res, HttpStatus.OK));
     }
 
-    //Get information from a specific user
+    //Get information from a specific user, using their email address as the value
     @GetMapping(path="/{email}/info")
     public ResponseEntity<Response> getUser(@PathVariable("email") String email)
     {
@@ -116,9 +116,12 @@ public class CandidateController {
     @GetMapping("/resume")
     public ResponseEntity<ByteArrayResource> getResume() throws IOException
     {
+        //Will change this later
+        //Will have to query for the path of their resume from the database
         Path path = Paths.get("C:\\Users\\thoai\\Documents\\Resume\\functionalSample.pdf");
-        ByteArrayResource resume = new ByteArrayResource(Files.readAllBytes(path));
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resume);
+        //ByteArrayResource resume = ;
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))//Specify that it is a pdf file
+        .body(new ByteArrayResource(Files.readAllBytes(path)));
     }
 
     //Testing requests

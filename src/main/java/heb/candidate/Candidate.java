@@ -46,6 +46,8 @@ public class Candidate {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "resume")
+    private String resume;
 
     public int getid()
     {
@@ -131,6 +133,14 @@ public class Candidate {
 
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public String getResume(){
+        return resume;
+    }
+
+    public void setResume(String resume){
+        this.resume = resume;
     }
 
     public boolean checkEmpty()
