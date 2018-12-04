@@ -79,7 +79,10 @@ public class CandidateController {
 //should only be able to update a candidate that is already present
 public ResponseEntity<Response> updateCand(@RequestBody Candidate cand){
     Candidate candata = candidateRepository.findFirstByuserName(attempt.getUserName());
+    Response res;
+        HttpStatus code;
     // Current Candidate info from mySQL
+    
     if ((candata != null))
     {
         
