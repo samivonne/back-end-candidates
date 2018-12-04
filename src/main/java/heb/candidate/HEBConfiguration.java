@@ -7,8 +7,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-@SpringBootApplication
-//@Configuration
+//@SpringBootApplication
+@Configuration
 public class HEBConfiguration {
 
 
@@ -22,7 +22,9 @@ public class HEBConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 //allow all apis to be accessed from any machine in the network
                 registry.addMapping("/**")
-                        .allowedOrigins("*");
+                        .allowedOrigins("*")
+                        .allowedHeaders("*")
+                        .allowedMethods("*");
             }
         };
     }

@@ -68,6 +68,8 @@ public class CandidateController {
     {
         Response res;
         HttpStatus code;
+        System.out.println(attempt.getEmail());
+        System.out.println(attempt.getPassword());
         // Check if email exist in the databse, then check the password
         Candidate cand = candidateRepository.findFirstByemail(attempt.getEmail());
         if ((cand != null) && (cand.getPassword().equals(attempt.getPassword())))
@@ -75,11 +77,17 @@ public class CandidateController {
             res = new SuccessResponseSingle("0", "Success", cand);
             code = HttpStatus.OK;
         }
+        else if (attempt.getEmail() == null)
+        {
+            res = new FailedResponse("1000", "Password incorrect");
+            code = HttpStatus.FORBIDDEN;
+        }
         else
         {
             res = new FailedResponse("1003", "Username or Password is incorrect");
             code = HttpStatus.UNAUTHORIZED;
         }
+
         return (new ResponseEntity<Response>(res, code));
     }
 
@@ -112,8 +120,6 @@ public class CandidateController {
         }
         return (new ResponseEntity<Response>(res, code));
     }
-
-
 
 
     @GetMapping("/resume/test")
